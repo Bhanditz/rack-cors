@@ -100,7 +100,7 @@ module Rack
         else
           DEFAULT_VARY_HEADERS
         end
-        headers[VARY_HEADER_KEY] = ((vary ? vary.split(/,\s*/) : []) + cors_vary_headers).uniq.join(', ')
+        headers[VARY_HEADER_KEY] = ((vary ? ([vary].flatten.map { |v| v.split(/,\s*/) }.flatten) : []) + cors_vary_headers).uniq.join(', ')
       end
 
       if debug? && result = env[ENV_KEY]
